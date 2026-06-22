@@ -1,3 +1,10 @@
+# 告诉 Zephyr 这是一个 Zephyr 模块
+zmk:
+  ext_id: dragonball_noirguo
+
 build:
   settings:
     board_root: .
+    # 核心：允许 Zephyr 扫描当前模块以及依赖模块里的驱动、设备树和 Kconfig
+    dts_root: .
+    kconfig_root: .
