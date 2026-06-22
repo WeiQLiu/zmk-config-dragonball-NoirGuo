@@ -144,9 +144,7 @@
             bindings = <&kp F2 &kp RC(C) &kp ESC>;
             label = "COPY_FILE_NAME";
         };
-    };
 
-    macros {
         To1_macro: To1_macro {
             compatible = "zmk,behavior-macro";
             label = "To1_macro";
