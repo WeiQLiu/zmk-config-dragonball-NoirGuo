@@ -45,7 +45,7 @@ layers:
   - B
   - N
   - M
-  - {t: ',', s: <}
+  - {t: ',', h: '4', s: <}
   - .
   - {t: /, h: RWIN, s: '?'}
   - $$mdi:apple-keyboard-shift$$
@@ -273,7 +273,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
+  - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
