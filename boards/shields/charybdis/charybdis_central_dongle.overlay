@@ -26,6 +26,12 @@
 
 &trackball_listener {
     status = "okay";
+	
+	/* 🌟 核心：注入自动鼠标层处理器 */
+    /* 参数解释：<目标层索引 触发超时时间(毫秒)> */
+    /* 这里设置：只要球动，自动切到 Layer 2；停下超过 1000ms，自动退回原图层 */
+    input-processors = <&zip_automouse_layer 2 1000>;
+
 };
 &trackball_listener2 {
     status = "okay";
