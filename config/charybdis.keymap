@@ -170,6 +170,16 @@
         };
     };
 
+&trackball_listener {
+        status = "okay"; // 🌟 激活这个监听器
+
+        // 🌟 核心：保留原本的物理方向转换，并在后面追加自动图层触发器
+        // MOUSE 对应你定义的第 7 层，1000 是停止移动后等待 1 秒切回
+        input-processors = 
+            <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>,
+            <&zip_temp_layer 3 600>; 
+    };
+
 
 keymap {
         compatible = "zmk,keymap";
