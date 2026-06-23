@@ -1,17 +1,14 @@
 /*
- * Dongle layer overlay (improved diagnostics)
+ * Dongle layer overlay (display "layers N" center-top)
  *
- * This update does two things:
- *  - Adds clearer logging to help determine whether the weak hook is present.
- *  - Uses an explicit pixel coordinate hint (center-top) when calling the
- *    weak hook. If the weak hook is still absent, the code will log that and
- *    sleep. This avoids risky direct display driver calls which are fragile
- *    across ZMK/Zephyr versions.
+ * This update changes the diagnostic overlay to render a short label
+ * "layers N" (N in 1..4 rotating) at the center-top of the screen using
+ * the optional weak hook zmk_dongle_display_draw_overlay(...).
  *
- * Once we confirm via logs whether the weak hook exists, we can either:
- *  - adapt to the dongle display API (call its pixel drawing functions) and
- *    render the real layer number, or
- *  - make the display module export a compatible hook.
+ * This is still non-invasive: if the weak hook is not present, the code
+ * will log a warning but won't break the build. Once we confirm the draw
+ * hook exists (or adapt to the real display API), this file can be
+ * updated to show the actual active layer.
  */
 
 #include <zephyr.h>
@@ -26,9 +23,7 @@ LOG_MODULE_REGISTER(dongle_layer_overlay, LOG_LEVEL_INF);
  * we'll call it to render the overlay. The weak attribute makes the symbol
  * optional at link time. The expected semantics (by convention here) are:
  *   void zmk_dongle_display_draw_overlay(const char *text, uint8_t x, uint8_t y)
- * where x,y are pixel coordinates. Some display modules may instead accept
- * special hint values (like 0xff) meaning "corner"; we'll use explicit
- * coords first.
+ * where x,y are pixel coordinates.
  */
 void zmk_dongle_display_draw_overlay(const char *text, uint8_t x, uint8_t y) __attribute__((weak));
 
@@ -36,7 +31,7 @@ void zmk_dongle_display_draw_overlay(const char *text, uint8_t x, uint8_t y) __a
 
 static void overlay_thread(void)
 {
-    char label[8];
+    char label[16];
     int idx = 1;
     const uint8_t draw_x = 56; /* center-ish for 129px width */
     const uint8_t draw_y = 2;  /* near top */
@@ -44,9 +39,9 @@ static void overlay_thread(void)
     LOG_INF("dongle_layer_overlay thread started");
 
     while (1) {
-        /* For now rotate a visible label so we can test drawing
-         * until we wire up the real layer query. */
-        snprintf(label, sizeof(label), "L%d", idx);
+        /* Show "layers N" rotating for testing. We'll replace this with
+         * the real layer number when we adapt to the ZMK layer API. */
+        snprintf(label, sizeof(label), "layers %d", idx);
 
         if (zmk_dongle_display_draw_overlay) {
             LOG_INF("Calling draw_overlay: %s @%d,%d", label, draw_x, draw_y);
