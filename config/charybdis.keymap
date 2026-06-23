@@ -12,6 +12,7 @@
 };
 
 / {
+    behaviors {
         test: test {
             compatible = "zmk,behavior-tap-dance";
             label = "TEST";
