@@ -14,7 +14,6 @@
         zmk,kscan = &kscan0;
         zephyr,display = &oled;
         zmk,underglow = &led_strip;
-        zephyr,console = &uart0;
     };
 
     kscan0: kscan_1 {
