@@ -24,22 +24,9 @@
     };
 };
 
-/ {
-    /* ==================================================================== */
-    /* ===== [核心自建] 因为底层没给标签，我们在根节点下自己实例化一个 ===== */
-    /* ==================================================================== */
-    my_automouse: my_automouse {
-        compatible = "zmk,input-processor-automouse-layer";
-        #input-processor-cells = <2>; // 声明它接收2个参数：图层和超时时间
-    };
-};
 
 &trackball_listener {
     status = "okay";
-	
-	/* 🌟 核心：注入自动鼠标层处理器 */
-    input-processors = <&my_automouse 3 600>;
-
 };
 &trackball_listener2 {
     status = "okay";
