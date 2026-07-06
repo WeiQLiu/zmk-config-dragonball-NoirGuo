@@ -49,6 +49,8 @@ lv_obj_t *zmk_display_status_screen() {
 
     screen = lv_obj_create(NULL);
 
+    LOG_INF("zmk_display_status_screen: initializing status screen");
+
     lv_style_init(&global_style);
     lv_style_set_bg_color(&global_style, lv_color_white());
     lv_style_set_bg_opa(&global_style, LV_OPA_COVER);
