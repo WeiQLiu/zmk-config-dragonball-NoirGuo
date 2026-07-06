@@ -14,6 +14,8 @@
 #include "widgets/wpm_status.h"
 
 #include <zephyr/logging/log.h>
+#include <zmk/keymap.h>
+#include <stdio.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static struct zmk_widget_output_status output_status_widget;
@@ -93,6 +95,13 @@ lv_obj_t *zmk_display_status_screen() {
 #else
     lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_BOTTOM_RIGHT, 0, -3);
 #endif
+    /* Ensure there's an initial visible layer number (in case events come later) */
+    {
+        char buf[8];
+        int idx = zmk_keymap_highest_layer_active();
+        snprintf(buf, sizeof(buf), "%d", idx);
+        lv_label_set_text(zmk_widget_layer_status_obj(&layer_status_widget), buf);
+    }
 #endif
 
 #if IS_ENABLED(CONFIG_ZMK_BATTERY)
