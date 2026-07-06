@@ -102,6 +102,17 @@ lv_obj_t *zmk_display_status_screen() {
         snprintf(buf, sizeof(buf), "%d", idx);
         lv_label_set_text(zmk_widget_layer_status_obj(&layer_status_widget), buf);
     }
+
+    /* Debug: add an explicit debug label at the bottom-right to verify text rendering */
+    {
+        lv_obj_t *debug_label = lv_label_create(screen);
+        char dbg[16];
+        int idx = zmk_keymap_highest_layer_active();
+        snprintf(dbg, sizeof(dbg), "LAYER_DEBUG:%d", idx);
+        lv_label_set_text(debug_label, dbg);
+        lv_obj_set_style_text_font(debug_label, &lv_font_unscii_8, 0);
+        lv_obj_align(debug_label, LV_ALIGN_BOTTOM_RIGHT, 0, -3);
+    }
 #endif
 
 #if IS_ENABLED(CONFIG_ZMK_BATTERY)
