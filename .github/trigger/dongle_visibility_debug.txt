@@ -1,0 +1,3 @@
+Visibility debug trigger for dongle-visibility-debug
+
+Triggered by Copilot to start GitHub Actions build to compile the visibility debug changes.
