@@ -86,32 +86,16 @@ lv_obj_t *zmk_display_status_screen() {
 
 #if IS_ENABLED(CONFIG_ZMK_DONGLE_DISPLAY_LAYER)
     zmk_widget_layer_status_init(&layer_status_widget, screen);
-#if IS_ENABLED(CONFIG_ZMK_DONGLE_DISPLAY_BONGO_CAT)
-    /* Align layer name to the left-bottom side of the Bongo Cat so both can be visible.
-       Offsets may be tuned depending on your OLED size. */
-    lv_obj_align_to(zmk_widget_layer_status_obj(&layer_status_widget),
-                    zmk_widget_bongo_cat_obj(&bongo_cat_widget),
-                    LV_ALIGN_OUT_BOTTOM_LEFT, -6, 0);
-#else
-    lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_BOTTOM_RIGHT, 0, -3);
-#endif
+
+    /* Center the layer label so it's immediately visible for testing. */
+    lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_CENTER, 0, 0);
+
     /* Ensure there's an initial visible layer number (in case events come later) */
     {
         char buf[8];
         int idx = zmk_keymap_highest_layer_active();
         snprintf(buf, sizeof(buf), "%d", idx);
         lv_label_set_text(zmk_widget_layer_status_obj(&layer_status_widget), buf);
-    }
-
-    /* Debug: add an explicit debug label at the bottom-right to verify text rendering */
-    {
-        lv_obj_t *debug_label = lv_label_create(screen);
-        char dbg[16];
-        int idx = zmk_keymap_highest_layer_active();
-        snprintf(dbg, sizeof(dbg), "LAYER_DEBUG:%d", idx);
-        lv_label_set_text(debug_label, dbg);
-        lv_obj_set_style_text_font(debug_label, &lv_font_unscii_8, 0);
-        lv_obj_align(debug_label, LV_ALIGN_BOTTOM_RIGHT, 0, -3);
     }
 #endif
 
