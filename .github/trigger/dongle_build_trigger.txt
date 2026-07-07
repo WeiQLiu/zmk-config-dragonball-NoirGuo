@@ -1,0 +1,5 @@
+Build trigger for dongle-layer-left-of-bongo_cat
+
+Triggered by Copilot to start a new GitHub Actions build so the latest debug changes are compiled.
+
+Timestamp: 2026-07-07T02:30:00Z
