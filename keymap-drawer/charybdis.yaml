@@ -1,6 +1,6 @@
 layout: {zmk_keyboard: charybdis}
 layers:
-  '0':
+  base:
   - $$mdi:keyboard-esc$$
   - {t: '1', s: '!'}
   - {t: '2', s: '@'}
@@ -45,19 +45,19 @@ layers:
   - B
   - N
   - M
-  - {t: ',', h: '4', s: <}
+  - {t: ',', h: layer4, s: <}
   - .
   - {t: /, h: RWIN, s: '?'}
   - $$mdi:apple-keyboard-shift$$
   - $$mdi:apple-keyboard-control$$
   - '&alt_shift_dance'
-  - {t: '$$mdi:keyboard-space$$', h: '1'}
-  - {t: '$$mdi:keyboard-space$$', h: '1'}
+  - {t: '$$mdi:keyboard-space$$', h: layer1}
+  - {t: '$$mdi:keyboard-space$$', h: layer1}
   - $$mdi:apple-keyboard-option$$
   - '&mkp MB1'
   - '&mkp MB2'
   - $$mdi:apple-keyboard-control$$
-  '1':
+  layer1:
   - $$mdi:keyboard-esc$$
   - F1
   - F2
@@ -96,8 +96,8 @@ layers:
   - {t: '$$mdi:keyboard-return$$', type: enter}
   - $$mdi:apple-keyboard-control$$
   - {t: '$$mdi:minus-circle-outline$$', type: none}
-  - '3'
-  - '2'
+  - layer3
+  - layer2
   - {t: '$$mdi:backspace$$', type: backspace}
   - $$mdi:backspace-reverse-outline$$
   - $$mdi:keyboard-esc$$
@@ -108,13 +108,13 @@ layers:
   - $$mdi:apple-keyboard-shift$$
   - $$mdi:apple-keyboard-option$$
   - $$mdi:keyboard-space$$
-  - {t: '0', h: toggle, type: held}
+  - {t: base, h: toggle, type: held}
   - {t: '$$mdi:apple-keyboard-shift$$', type: held alternate}
   - $$mdi:apple-keyboard-option$$
   - '&mkp MB1'
   - '&mkp MB2'
   - $$mdi:apple-keyboard-control$$
-  '2':
+  layer2:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -165,13 +165,13 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB3'
-  - {t: '0', h: toggle, type: held}
+  - {t: base, h: toggle, type: held}
   - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB1'
   - '&mkp MB2'
   - {t: '$$mdi:transfer$$', type: trans}
-  '3':
+  layer3:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -213,7 +213,7 @@ layers:
   - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '0', h: toggle}
+  - {t: base, h: toggle}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB1'
   - '&mkp MB2'
@@ -222,13 +222,13 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB3'
-  - {t: '$$mdi:keyboard-space$$', h: '1', type: held}
+  - {t: '$$mdi:keyboard-space$$', h: layer1, type: held}
   - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB1'
   - '&mkp MB2'
   - {t: '$$mdi:transfer$$', type: trans}
-  '4':
+  layer4:
   - {h: '$$mdi:arrow-down-bold$$', s: '$$mdi:bluetooth-connect$$'}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -287,8 +287,8 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
 combos:
 - p: [15, 28]
-  k: '2'
-  l: ['0']
+  k: layer2
+  l: [base]
 - p: [15, 16]
   k: (
 - p: [19, 20]
@@ -297,10 +297,10 @@ combos:
   k: $$mdi:keyboard-esc$$
 - p: [25, 26]
   k: '"'
-  l: ['0']
+  l: [base]
 - p: [33, 34]
   k: {t: '''', s: '"'}
-  l: ['0']
+  l: [base]
 - p: [37, 38]
   k: {t: '$$mdi:keyboard-return$$', type: enter}
 - p: [21, 20]
@@ -309,18 +309,18 @@ combos:
   k: '|'
 - p: [27, 28]
   k: {t: '[', s: '{'}
-  l: ['0']
+  l: [base]
 - p: [31, 32]
   k: {t: ']', s: '}'}
-  l: ['0']
+  l: [base]
 - p: [39, 40]
   k: '{'
-  l: ['0']
+  l: [base]
 - p: [43, 44]
   k: '}'
 - p: [27, 16]
-  k: {t: '2', h: toggle}
-  l: ['0']
+  k: {t: layer2, h: toggle}
+  l: [base]
 - p: [45, 46]
-  k: '2'
-  l: ['0', '3']
+  k: layer2
+  l: [base, layer3]
