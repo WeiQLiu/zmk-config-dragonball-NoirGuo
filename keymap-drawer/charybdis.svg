@@ -511,8 +511,8 @@ rect.held, rect.combo.held {
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
 <text x="0" y="-4" class="key tap">,</text>
-<a href="#layer4">
-<text x="0" y="24" class="key hold layer-activator">layer4</text>
+<a href="#slow">
+<text x="0" y="24" class="key hold layer-activator">slow</text>
 </a><text x="0" y="-24" class="key shifted">&lt;</text>
 </g>
 <g transform="translate(588, 196)" class="key keypos-45">
@@ -546,15 +546,15 @@ rect.held, rect.combo.held {
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
 <use href="#mdi:keyboard-space" xlink:href="#mdi:keyboard-space" x="-9" y="-13" height="18" width="18.0" class="key tap glyph mdi:keyboard-space"/>
-<a href="#layer1">
-<text x="0" y="24" class="key hold layer-activator">layer1</text>
+<a href="#func">
+<text x="0" y="24" class="key hold layer-activator">func</text>
 </a></g>
 <g transform="translate(420, 252)" class="key keypos-51">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
 <use href="#mdi:keyboard-space" xlink:href="#mdi:keyboard-space" x="-9" y="-13" height="18" width="18.0" class="key tap glyph mdi:keyboard-space"/>
-<a href="#layer1">
-<text x="0" y="24" class="key hold layer-activator">layer1</text>
+<a href="#func">
+<text x="0" y="24" class="key hold layer-activator">func</text>
 </a></g>
 <g transform="translate(476, 252)" class="key keypos-52">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
@@ -582,8 +582,8 @@ rect.held, rect.combo.held {
 </g>
 <g class="combo combopos-0">
 <rect rx="6" ry="6" x="210" y="99" width="28" height="26" class="combo"/>
-<a href="#layer2">
-<text x="224" y="112" class="combo tap layer-activator">layer2</text>
+<a href="#quick">
+<text x="224" y="112" class="combo tap layer-activator">quick</text>
 </a></g>
 <g class="combo combopos-1">
 <rect rx="6" ry="6" x="210" y="71" width="28" height="26" class="combo"/>
@@ -638,19 +638,19 @@ rect.held, rect.combo.held {
 </g>
 <g class="combo combopos-13">
 <rect rx="6" ry="6" x="210" y="99" width="28" height="26" class="combo"/>
-<a href="#layer2">
-<text x="224" y="112" class="combo tap layer-activator">layer2</text>
+<a href="#quick">
+<text x="224" y="112" class="combo tap layer-activator">quick</text>
 </a><text x="224" y="123" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-14">
 <rect rx="6" ry="6" x="602" y="183" width="28" height="26" class="combo"/>
-<a href="#layer2">
-<text x="616" y="196" class="combo tap layer-activator">layer2</text>
+<a href="#quick">
+<text x="616" y="196" class="combo tap layer-activator">quick</text>
 </a></g>
 </g>
 </g>
-<g transform="translate(40, 392)" class="layer-layer1">
-<text x="0" y="28" class="label" id="layer1">layer1:</text>
+<g transform="translate(40, 392)" class="layer-func">
+<text x="0" y="28" class="label" id="func">func:</text>
 <g transform="translate(0, 56)">
 <g transform="translate(28, 28)" class="key keypos-0">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
@@ -850,14 +850,14 @@ rect.held, rect.combo.held {
 <g transform="translate(140, 196)" class="key keypos-38">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
-<a href="#layer3">
-<text x="0" y="-4" class="key tap layer-activator">layer3</text>
+<a href="#mouse">
+<text x="0" y="-4" class="key tap layer-activator">mouse</text>
 </a></g>
 <g transform="translate(196, 196)" class="key keypos-39">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
-<a href="#layer2">
-<text x="0" y="-4" class="key tap layer-activator">layer2</text>
+<a href="#quick">
+<text x="0" y="-4" class="key tap layer-activator">quick</text>
 </a></g>
 <g transform="translate(252, 196)" class="key backspace keypos-40">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key backspace side"/>
@@ -977,8 +977,8 @@ rect.held, rect.combo.held {
 </g>
 </g>
 </g>
-<g transform="translate(40, 784)" class="layer-layer2">
-<text x="0" y="28" class="label" id="layer2">layer2:</text>
+<g transform="translate(40, 784)" class="layer-quick">
+<text x="0" y="28" class="label" id="quick">quick:</text>
 <g transform="translate(0, 56)">
 <g transform="translate(28, 28)" class="key trans keypos-0">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key trans side"/>
@@ -1304,8 +1304,8 @@ rect.held, rect.combo.held {
 </g>
 </g>
 </g>
-<g transform="translate(40, 1176)" class="layer-layer3">
-<text x="0" y="28" class="label" id="layer3">layer3:</text>
+<g transform="translate(40, 1176)" class="layer-mouse">
+<text x="0" y="28" class="label" id="mouse">mouse:</text>
 <g transform="translate(0, 56)">
 <g transform="translate(28, 28)" class="key trans keypos-0">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key trans side"/>
@@ -1570,8 +1570,8 @@ rect.held, rect.combo.held {
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key held side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key held"/>
 <use href="#mdi:keyboard-space" xlink:href="#mdi:keyboard-space" x="-9" y="-13" height="18" width="18.0" class="key held tap glyph mdi:keyboard-space"/>
-<a href="#layer1">
-<text x="0" y="24" class="key held hold layer-activator">layer1</text>
+<a href="#func">
+<text x="0" y="24" class="key held hold layer-activator">func</text>
 </a></g>
 <g transform="translate(420, 252)" class="key held keypos-51">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key held side"/>
@@ -1631,13 +1631,13 @@ rect.held, rect.combo.held {
 </g>
 <g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="183" width="28" height="26" class="combo"/>
-<a href="#layer2">
-<text x="616" y="196" class="combo tap layer-activator">layer2</text>
+<a href="#quick">
+<text x="616" y="196" class="combo tap layer-activator">quick</text>
 </a></g>
 </g>
 </g>
-<g transform="translate(40, 1568)" class="layer-layer4">
-<text x="0" y="28" class="label" id="layer4">layer4:</text>
+<g transform="translate(40, 1568)" class="layer-slow">
+<text x="0" y="28" class="label" id="slow">slow:</text>
 <g transform="translate(0, 56)">
 <g transform="translate(28, 28)" class="key keypos-0">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>

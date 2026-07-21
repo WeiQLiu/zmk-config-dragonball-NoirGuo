@@ -45,19 +45,19 @@ layers:
   - B
   - N
   - M
-  - {t: ',', h: layer4, s: <}
+  - {t: ',', h: slow, s: <}
   - .
   - {t: /, h: RWIN, s: '?'}
   - $$mdi:apple-keyboard-shift$$
   - $$mdi:apple-keyboard-control$$
   - '&alt_shift_dance'
-  - {t: '$$mdi:keyboard-space$$', h: layer1}
-  - {t: '$$mdi:keyboard-space$$', h: layer1}
+  - {t: '$$mdi:keyboard-space$$', h: func}
+  - {t: '$$mdi:keyboard-space$$', h: func}
   - $$mdi:apple-keyboard-option$$
   - '&mkp MB1'
   - '&mkp MB2'
   - $$mdi:apple-keyboard-control$$
-  layer1:
+  func:
   - $$mdi:keyboard-esc$$
   - F1
   - F2
@@ -96,8 +96,8 @@ layers:
   - {t: '$$mdi:keyboard-return$$', type: enter}
   - $$mdi:apple-keyboard-control$$
   - {t: '$$mdi:minus-circle-outline$$', type: none}
-  - layer3
-  - layer2
+  - mouse
+  - quick
   - {t: '$$mdi:backspace$$', type: backspace}
   - $$mdi:backspace-reverse-outline$$
   - $$mdi:keyboard-esc$$
@@ -114,7 +114,7 @@ layers:
   - '&mkp MB1'
   - '&mkp MB2'
   - $$mdi:apple-keyboard-control$$
-  layer2:
+  quick:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -171,7 +171,7 @@ layers:
   - '&mkp MB1'
   - '&mkp MB2'
   - {t: '$$mdi:transfer$$', type: trans}
-  layer3:
+  mouse:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -222,13 +222,13 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB3'
-  - {t: '$$mdi:keyboard-space$$', h: layer1, type: held}
+  - {t: '$$mdi:keyboard-space$$', h: func, type: held}
   - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
   - '&mkp MB1'
   - '&mkp MB2'
   - {t: '$$mdi:transfer$$', type: trans}
-  layer4:
+  slow:
   - {h: '$$mdi:arrow-down-bold$$', s: '$$mdi:bluetooth-connect$$'}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -287,7 +287,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
 combos:
 - p: [15, 28]
-  k: layer2
+  k: quick
   l: [base]
 - p: [15, 16]
   k: (
@@ -319,8 +319,8 @@ combos:
 - p: [43, 44]
   k: '}'
 - p: [27, 16]
-  k: {t: layer2, h: toggle}
+  k: {t: quick, h: toggle}
   l: [base]
 - p: [45, 46]
-  k: layer2
-  l: [base, layer3]
+  k: quick
+  l: [base, mouse]
