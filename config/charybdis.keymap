@@ -253,6 +253,6 @@
     // 🌟 添加滚动配置
     scroll {
         layers = <1>;
-        input-processors = <&zip_xy_transform ( INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>, <&zip_xy_scaler 1 1>, <&zip_xy_to_scroll_mapper>;
+        input-processors = <&zip_xy_transform ( INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>, <&zip_x_scaler 1 30>, <&zip_y_scaler 1 10> , <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 3>;
     };
 };
