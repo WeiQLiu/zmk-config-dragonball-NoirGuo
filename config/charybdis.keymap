@@ -192,7 +192,7 @@
         };
 
         layer_1 {
-            display-name = "layer1";
+            display-name = "func";
             bindings = <
 &kp ESC         &kp F1    &kp F2         &kp F3        &kp F4           &kp F5      &kp F6           &kp F7         &kp F8    &kp F9            &kp F10            &kp BSLH
 &kp GRAVE       &kp HOME  &kp PAGE_UP    &test         &none            &none       &none            &none          &kp UP    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp DEL
@@ -204,7 +204,7 @@
         };
 
         layer_2 {
-            display-name = "layer2";
+            display-name = "quick";
             bindings = <
 &trans     &trans  &trans  &trans  &trans        &trans        &trans  &trans    &trans    &trans    &trans  &trans
 &trans     &trans  &trans  &trans  &out OUT_TOG  &bt BT_NXT    &trans  &trans    &trans    &trans    &trans  &trans
@@ -216,7 +216,7 @@
         };
 
         layer_3 {
-            display-name = "layer3";
+            display-name = "mouse";
             bindings = <
 &trans  &trans  &trans  &trans  &trans    &trans         &trans  &trans    &trans    &trans    &trans  &trans
 &trans  &trans  &trans  &trans  &trans    &trans         &trans  &trans    &trans    &trans    &trans  &trans
@@ -228,7 +228,7 @@
         };
 
         layer_4 {
-            display-name = "layer4";
+            display-name = "slow";
             bindings = <
 &bt BT_NXT  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
 &trans      &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
