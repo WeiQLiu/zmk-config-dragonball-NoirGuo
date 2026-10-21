@@ -21,6 +21,7 @@
  */
 
 #include <zephyr/kernel.h>
+#include <zephyr/init.h>
 #include <zephyr/logging/log.h>
 
 #include <lvgl.h>
@@ -69,7 +70,13 @@ static void ensure_widget(void) {
     lv_obj_set_size(key_box, KEY_BOX_W, KEY_BOX_H);
     lv_obj_set_pos(key_box, KEY_BOX_X, KEY_BOX_Y);
     lv_obj_clear_flag(key_box, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_add_flag(key_box, LV_OBJ_FLAG_IGNORE_LAYOUT);
     lv_obj_set_style_bg_opa(key_box, LV_OPA_TRANSP, 0);
+
+    /* The display module creates its widgets during boot, so a box created
+     * on the first key press is already on top.  Keep it there explicitly in
+     * case another widget calls lv_obj_move_foreground() while updating. */
+    lv_obj_move_foreground(key_box);
 
     key_label = lv_label_create(key_box);
     lv_obj_set_width(key_label, KEY_BOX_W);
@@ -89,7 +96,8 @@ static void key_status_update_cb(struct key_status_state state) {
     }
 
     if (!state.valid) {
-        lv_label_set_text(key_label, "");
+        lv_label_set_text(key_label, "-");
+        lv_obj_center(key_label);
         return;
     }
 
@@ -97,6 +105,7 @@ static void key_status_update_cb(struct key_status_state state) {
 
     /* Re-centre after the text height changed (one line vs. two lines). */
     lv_obj_center(key_label);
+    lv_obj_move_foreground(key_box);
 }
 
 static struct key_status_state key_status_get_state(const zmk_event_t *eh) {
@@ -117,3 +126,35 @@ static struct key_status_state key_status_get_state(const zmk_event_t *eh) {
 ZMK_DISPLAY_WIDGET_LISTENER(widget_key_status, struct key_status_state, key_status_update_cb,
                             key_status_get_state)
 ZMK_SUBSCRIPTION(widget_key_status, zmk_keycode_state_changed);
+
+/*
+ * Create the overlay once at boot as well, so the area shows a "-" before the
+ * first key press.  The actual creation has to happen in the display work
+ * queue; a small delayed work waits for zmk_display_init() to finish.
+ */
+static void key_status_create_work_cb(struct k_work *work) {
+    if (key_label == NULL) {
+        widget_key_status_init();
+    }
+}
+
+K_WORK_DEFINE(key_status_create_work, key_status_create_work_cb);
+
+static void key_status_delayed_create_cb(struct k_work *work);
+K_WORK_DELAYABLE_DEFINE(key_status_delayed_create, key_status_delayed_create_cb);
+
+static void key_status_delayed_create_cb(struct k_work *work) {
+    if (!zmk_display_is_initialized()) {
+        k_work_reschedule(&key_status_delayed_create, K_MSEC(500));
+        return;
+    }
+
+    k_work_submit_to_queue(zmk_display_work_q(), &key_status_create_work);
+}
+
+static int key_status_overlay_init(void) {
+    k_work_schedule(&key_status_delayed_create, K_MSEC(800));
+    return 0;
+}
+
+SYS_INIT(key_status_overlay_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
