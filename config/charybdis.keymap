@@ -32,7 +32,9 @@
     mouse_layer_gate: mouse_layer_gate {
         compatible = "zmk,input-processor-mouse-layer-gate";
         #input-processor-cells = <2>;
-        activation-threshold = <30>;
+        // activation-threshold = <30>; // 30 约等于2.5mm 放大四倍左右吧。
+        activation-threshold = <120>; // 120 约等于10 mm，轨迹球10mm以内的动不会发生变化。 
+
         activation-window-ms = <300>;
     };
 
