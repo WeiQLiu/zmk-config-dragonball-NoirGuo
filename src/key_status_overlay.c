@@ -83,7 +83,10 @@ static void ensure_widget(void) {
     lv_label_set_long_mode(key_label, LV_LABEL_LONG_WRAP);
     lv_obj_set_style_text_align(key_label, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_set_style_text_font(key_label, &lv_font_unscii_8, 0);
-    lv_obj_set_style_text_color(key_label, lv_color_white(), 0);
+    /* The mono theme is light (black text on white) and the SH1106 panel is
+     * inverted in hardware, so hard-coding white here makes the text
+     * invisible.  Copy the screen's current text colour instead. */
+    lv_obj_set_style_text_color(key_label, lv_obj_get_style_text_color(screen, 0), 0);
     lv_obj_set_style_text_line_space(key_label, 0, 0);
     lv_obj_set_style_bg_opa(key_label, LV_OPA_TRANSP, 0);
 }
