@@ -18,6 +18,24 @@
 };
 
 / {
+    /*
+     * 轨迹球自动鼠标层（带位移门限）。
+     *
+     * param1 = 目标层（3 = mouse），param2 = 无操作后回落时间（400ms）。
+     *
+     * activation-threshold：需要累计移动多少个计数才进入鼠标层。
+     *   trackball 已设为 1200 CPI，再经下面 zip_xy_scaler 1/4 还原成
+     *   300 CPI，和没有 dongle 时的手感一致；此时 30 counts ≈ 2.5mm。
+     * activation-window-ms：这些位移必须在 300ms 内累计完成，
+     *   否则清零，避免缓慢漂移慢慢凑够阈值。
+     */
+    mouse_layer_gate: mouse_layer_gate {
+        compatible = "zmk,input-processor-mouse-layer-gate";
+        #input-processor-cells = <2>;
+        activation-threshold = <30>;
+        activation-window-ms = <300>;
+    };
+
     behaviors {
         test: test {
             compatible = "zmk,behavior-tap-dance";
@@ -242,17 +260,25 @@
 };
 
 &trackball_listener {
-    status = "okay"; // 🌟 激活这个监听器
-    // 🌟 核心：保留原本的物理方向转换，并在后面追加自动图层触发器
-    // MOUSE 对应你定义的第 7 层，1000 是停止移动后等待 1 秒切回
+    status = "okay";
 
+    /*
+     * 方向转换之后，先把 1200 CPI 的原始计数除以 4，得到 300 CPI。
+     * 这和无 dongle 固件里 PMW3610_CPI=1200 + CPI_DIVIDOR=4 的输出
+     * 完全一致，刷完如果觉得慢/快，只改这个 1/4 即可。
+     * 最后用 mouse_layer_gate 代替原来的 zip_temp_layer：位移够了才
+     * 进鼠标层，400ms 没有移动/按键就回落到原来的层。
+     */
     input-processors =
         <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>,
-        <&zip_temp_layer 3 600>;
+        <&zip_xy_scaler 1 4>,
+        <&mouse_layer_gate 3 400>;
 
     // 🌟 添加滚动配置
     scroll {
         layers = <1>;
-        input-processors = <&zip_xy_transform ( INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>, <&zip_x_scaler 1 30>, <&zip_y_scaler 1 10> , <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 3>;
+        /* 滚动链不经过上面的 1/4 缩放，所以这里单独把 1200 CPI 还原成
+         * 原来的 400 CPI（1/3），保持换 dongle 前的滚动速度不变。 */
+        input-processors = <&zip_xy_transform ( INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>, <&zip_xy_scaler 1 3>, <&zip_x_scaler 1 30>, <&zip_y_scaler 1 10> , <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 3>;
     };
 };

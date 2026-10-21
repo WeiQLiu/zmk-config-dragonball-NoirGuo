@@ -1,0 +1,32 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: |
+  Input processor that activates a temporary layer only after enough
+  trackball movement, and keeps it active while the trackball moves or a
+  non-transparent key on that layer is held.
+
+  param1 = target layer index
+  param2 = idle timeout in milliseconds
+
+compatible: "zmk,input-processor-mouse-layer-gate"
+
+include: ip_two_param.yaml
+
+properties:
+  activation-threshold:
+    type: int
+    required: false
+    default: 30
+    description: |
+      Cumulative |dx| + |dy| (in input counts, after any earlier scaler)
+      that must be reached before the layer is activated.
+
+  activation-window-ms:
+    type: int
+    required: false
+    default: 300
+    description: |
+      Time window over which the movement is accumulated. If no movement
+      arrives for this long, the accumulator is reset. This prevents very
+      slow drift from eventually crossing the threshold.

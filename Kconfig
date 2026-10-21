@@ -1,0 +1,13 @@
+config ZMK_INPUT_PROCESSOR_MOUSE_LAYER_GATE
+    bool "Movement-gated temporary mouse layer input processor"
+    default y if DT_HAS_ZMK_INPUT_PROCESSOR_MOUSE_LAYER_GATE_ENABLED
+    depends on ZMK_POINTING
+    depends on !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
+    help
+      Input processor that only activates a temporary layer after the
+      trackball has moved a configurable distance inside a short time
+      window, then deactivates it again after an idle timeout.
+
+      Unlike zmk,input-processor-temp-layer, tiny bumps and chassis
+      vibrations do not switch layers, and pressing a non-transparent
+      key on the target layer restarts the idle timeout.
