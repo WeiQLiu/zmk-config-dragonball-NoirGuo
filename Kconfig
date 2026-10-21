@@ -11,3 +11,18 @@ config ZMK_INPUT_PROCESSOR_MOUSE_LAYER_GATE
       Unlike zmk,input-processor-temp-layer, tiny bumps and chassis
       vibrations do not switch layers, and pressing a non-transparent
       key on the target layer restarts the idle timeout.
+
+config ZMK_KEY_STATUS_OVERLAY
+    bool "Show the last key sent to the host on the display"
+    default y if ZMK_DISPLAY
+    depends on ZMK_DISPLAY
+    select LV_USE_LABEL
+    select LV_FONT_UNSCII_8
+    help
+      Adds a small overlay in the free middle-right area of the dongle
+      display that shows the last key press sent to the computer, for
+      example A, Space, Enter, PageUp or PageDn.
+
+      Pure modifier presses are ignored because the existing modifier
+      widget already shows them.
+

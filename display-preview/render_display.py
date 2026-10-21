@@ -139,8 +139,19 @@ def battery(img: Image.Image, x: int, y: int, level: int, usb: bool = False) -> 
             px[x + xx, y + yy] = 255
 
 
+def draw_key(img: Image.Image, text: str) -> None:
+    """Last-key overlay: 46x26 box at (31, 19), centred, max two lines."""
+    lines = text.split("\n")
+    line_h = 9
+    y0 = 19 + (26 - line_h * len(lines)) // 2
+    for i, line in enumerate(lines):
+        width = len(line) * 8 + (len(line) - 1) * 1
+        draw_text(img, 31 + (46 - width) // 2, y0 + i * line_h, line)
+
+
 def base_screen(layer: str, mods: set[str], mouse_active: bool, usb_selected: bool,
-                profile: int, profile_state: str, batteries: list[int]) -> Image.Image:
+                profile: int, profile_state: str, batteries: list[int],
+                key_text: str = "A") -> Image.Image:
     img = Image.new("L", (128, 64), 0)
 
     usb = parse_bitmap(WIDGETS / "output_status_sym.c", "sym_usb", 9, 14)
@@ -193,6 +204,9 @@ def base_screen(layer: str, mods: set[str], mouse_active: bool, usb_selected: bo
     width = len(layer) * 8 + (len(layer) - 1) * 1
     draw_text(img, 128 - width, 54, layer)
 
+    # last key overlay (red box lower half)
+    draw_key(img, key_text)
+
     return img
 
 
@@ -223,8 +237,8 @@ def compose(base: Image.Image, mouse: Image.Image) -> None:
               fill=(235, 235, 235))
 
     for idx, (label, img) in enumerate([
-        ("idle: base layer, both halves 87% / 92%", base),
-        ("trackball moving: layer name switches to mouse", mouse),
+        ("idle: base layer, last key A, both halves 87% / 92%", base),
+        ("trackball moving: layer mouse, last key PageUp", mouse),
     ]):
         y = 70 + idx * 390
         big = img.resize((128 * scale, 64 * scale), Image.NEAREST)
@@ -245,6 +259,7 @@ if __name__ == "__main__":
         profile=1,
         profile_state="open",
         batteries=[87, 92],
+        key_text="A",
     )
     save(base, "dongle-display-base.png")
 
@@ -256,6 +271,7 @@ if __name__ == "__main__":
         profile=1,
         profile_state="open",
         batteries=[87, 92],
+        key_text="Page\nUp",
     )
     save(mouse, "dongle-display-mouse.png")
     compose(base, mouse)

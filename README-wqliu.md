@@ -111,6 +111,26 @@ mouse_layer_gate: mouse_layer_gate {
 
 ---
 
+## 5. 最近按键显示（last key overlay）
+
+在 dongle 屏幕中间偏右的空白区加了一个小 overlay：
+
+- 区域：`x = 31..77, y = 19..45`（46×26 px），也就是你画的红色框的下半部分；
+  红色框最上面 `y = 0..18` 会压到右上角电池，所以没有用那一段。
+- 左边避开 NLCK / HID 指示灯（`x < 31`），右边避开 Bongo Cat（`x >= 78`），
+  下方避开修饰键（`y >= 47`）。
+- 只显示**最后一次发送给电脑的非修饰键**；纯 Ctrl/Shift/Alt/Gui 不覆盖它，
+  因为左下角本来就有修饰键图标。
+- 短键（`A`、`Space`、`Enter`）一行居中显示；长键（`PageUp`/`PageDn`）显示两行
+  `Page` + `Up` / `Dn`，仍然居中。
+- 映射表覆盖字母、数字、F1–F12、方向/编辑键、媒体键（`VOL+`、`MUTE`、`PLAY` 等），
+  来自 [`zzuse/zmk-nice-oled-zz`](https://github.com/zzuse/zmk-nice-oled-zz)（MIT），
+  已改成适合 46 px 宽度的完整短名。
+- Kconfig：`CONFIG_ZMK_KEY_STATUS_OVERLAY`，`default y if ZMK_DISPLAY`，只影响 dongle。
+- 源码：`src/key_status_overlay.c`、`src/keycode_name.c` / `.h`。
+
+---
+
 ## 编译
 
 GitHub Actions 的 ZMK 构建流程会检测到仓库根目录的 `zephyr/module.yml`，自动把本仓库作为
@@ -137,6 +157,9 @@ CMakeLists.txt                                  新增（模块编译入口）
 Kconfig                                         新增（CONFIG_ZMK_INPUT_PROCESSOR_MOUSE_LAYER_GATE）
 zephyr/module.yml                               增加 cmake / kconfig / dts_root
 src/input_processor_mouse_layer_gate.c          新增（位移门限 + 续时逻辑）
+src/key_status_overlay.c                        新增（最近按键 overlay）
+src/keycode_name.c / .h                         新增（HID 按键名映射，MIT 改编）
+tools/fetch_keycode_name.py                     新增（生成映射表的脚本）
 dts/bindings/input_processors/zmk,input-processor-mouse-layer-gate.yaml  新增
 config/charybdis.keymap                         新处理器节点、scaler、400ms
 boards/shields/charybdis/trackball.dtsi         cpi 400 → 1200
